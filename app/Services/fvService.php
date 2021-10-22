@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Arr;
 
 /**
- * Class fvServiceRepository
+ * Class fvService
  */
-class fvService extends BaseRepository
+class fvService
 {
     public function updateContact()
     {
+        $token = 'xxx';
         $headers = [
             'Authorization' => 'Bearer '.$token,
             'x-fv-sessionid' => 'xxxxxxxxxxxxx',
         ];
 
-        $response = Http::post('https://api.filevine.io/core/contacts/1',[
+        $response = Http::patch('https://api.filevine.io/core/contacts/1',[
             'headers' => $headers,
         ]);
 
