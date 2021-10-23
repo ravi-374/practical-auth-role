@@ -17,10 +17,11 @@ class fvService
     public function updateContact()
     {
         $token = 'xxx';
+        $sessionId = config('services.session_id');
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
-            'x-fv-sessionid' => 'xxxxxxxxxxxxx',
+            'x-fv-sessionid' => $sessionId,
             'Content-Type'   => 'application/json',
         ])->patch('https://api.filevine.io/core/contacts/1',[
             'email' => 'steve@gmail.com',
