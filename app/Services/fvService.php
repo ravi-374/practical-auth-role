@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -9,16 +11,21 @@ use Illuminate\Support\Facades\Http;
  */
 class fvService
 {
+    /**
+     * @return PromiseInterface|Response
+     */
     public function updateContact()
     {
         $token = 'xxx';
-        $headers = [
+
+        $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
             'x-fv-sessionid' => 'xxxxxxxxxxxxx',
-        ];
-
-        $response = Http::patch('https://api.filevine.io/core/contacts/1',[
-            'headers' => $headers,
+            'Content-Type'   => 'application/json',
+        ])->patch('https://api.filevine.io/core/contacts/1',[
+            'email' => 'steve@gmail.com',
+            'address' => '1844 Forest Avenue',
+            'full_name' => 'Steve',
         ]);
 
         return $response;
